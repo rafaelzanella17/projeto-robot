@@ -1,19 +1,19 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource    ../resources/login_keywords.resource
-Test Setup    Open Browser    browser=chrome    
+# Test Setup    Open Browser    browser=chrome
+Suite Setup    Open Browser    browser=chrome
+
 
 *** Variables ***
 ${URL}    https://www.saucedemo.com/
-${BROWSER}    chrome
-${USERNAME}    standard_user
-${PASSWORD}    secret_sauce
+
 
 
 *** Test Cases ***
 Successful Login
     I nagigate to the login page    ${URL}
-    I input correct credentials    ${USERNAME}    ${PASSWORD}
+    I input correct credentials
     I click on the login button
     I am able view the home page
 
@@ -21,22 +21,22 @@ Unsuccessful Login - No credentials
     I nagigate to the login page    ${URL}
     I input no credentials
     I click on the login button
-    I am able to see the expected error message    Epic sadface: Username is required
+    I am able to see the expected error message for no credentials
 
 Unsuccessful Login - No Username
     I nagigate to the login page    ${URL}
-    I input only the password    ${PASSWORD}
+    I input only the password
     I click on the login button
-    I am able to see the expected error message    Epic sadface: Username is required
+    I am able to see the expected error message for no username
 
 Unsuccessful Login - No Password
     I nagigate to the login page    ${URL}
-    I input only the username    ${USERNAME}
+    I input only the username
     I click on the login button
-    I am able to see the expected error message    Epic sadface: Password is required
+    I am able to see the expected error message for no password
 
 Unsuccessful Login - Wrong Credentials
     I nagigate to the login page    ${URL}
-    I input wrong credentials    Usuario    Senha
+    I input wrong credentials
     I click on the login button
-    I am able to see the expected error message    Epic sadface: Username and password do not match any user in this service
+    I am able to see the expected error message for wrong credentials
